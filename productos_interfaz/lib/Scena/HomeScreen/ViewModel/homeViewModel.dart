@@ -6,7 +6,7 @@ import '../../../Repository/GetListRepository.dart';
 abstract class IIGetListViewModel {
   void onGetItem(GetListItems getListItems);
   void onError(String error);
-  void onDeleteItem(GetItemDelete getItemDelete);
+  // void onDeleteItem(GetItemDelete getItemDelete);
 }
 
 class IGetViewModel implements IUGetListrepository {
@@ -20,9 +20,9 @@ class IGetViewModel implements IUGetListrepository {
     iGetListRepository.getlistItem();
   }
 
-  void getItemDelete() {
-    iGetListRepository.deleteItems();
-  }
+  // void getItemDelete() {
+  //   iGetListRepository.deleteItems();
+  // }
 
   @override
   void onError(String error) {
@@ -36,9 +36,9 @@ class IGetViewModel implements IUGetListrepository {
     iiGetListViewModel.onGetItem(getListItems);
   }
 
-  @override
-  void onDeleteItem(GetItemDelete getItemDelete) {
-    // TODO: implement onDeleteItem
-    iiGetListViewModel.onDeleteItem(getItemDelete);
-  }
+  // @override
+  // void onDeleteItem(GetItemDelete getItemDelete) {
+  //   // TODO: implement onDeleteItem
+  //   iiGetListViewModel.onDeleteItem(getItemDelete);
+  // }
 }

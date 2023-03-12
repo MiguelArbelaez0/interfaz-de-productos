@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
   Widget build(BuildContext context) {
     iGetViewModel = IGetViewModel(this);
     iGetViewModel.getListItem();
-    iGetViewModel.getItemDelete();
 
     if (!isFirstCall) {
       iGetViewModel.getListItem();
