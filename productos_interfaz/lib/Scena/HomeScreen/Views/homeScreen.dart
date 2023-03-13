@@ -96,8 +96,6 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
   void onDeleteItem() {
     // TODO: implement onDeleteItem
 
-    // setState(() {
-    //   iGetViewModel.getListItem();
-    // });
+    iGetViewModel.getListItem();
   }
 }
