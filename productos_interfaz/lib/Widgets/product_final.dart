@@ -5,7 +5,8 @@ import 'favorite_icon.dart';
 
 class ProductFinal extends StatefulWidget {
   Datum datum;
-  ProductFinal({super.key, required this.datum});
+  Function(String) onDelete;
+  ProductFinal({super.key, required this.datum, required this.onDelete});
 
   @override
   State<ProductFinal> createState() => _ProductFinalState();
@@ -96,7 +97,12 @@ class _ProductFinalState extends State<ProductFinal> {
                                 margin: EdgeInsets.only(right: 6),
                                 width: 19,
                                 height: 19,
-                                child: Icon(Icons.delete),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    widget.onDelete(widget.datum.id);
+                                  },
+                                  child: Icon(Icons.delete),
+                                ),
                               ),
                               SizedBox(
                                 width: 6,

@@ -5,7 +5,9 @@ import '../Data/GetListItems.dart';
 
 class ListItemsWidget extends StatefulWidget {
   GetListItems getListItems;
-  ListItemsWidget(this.getListItems);
+  Function(String) onDelete;
+  ListItemsWidget(
+      {super.key, required this.getListItems, required this.onDelete});
 
   @override
   State<StatefulWidget> createState() => _ListItemsWidget();
@@ -27,10 +29,16 @@ class _ListItemsWidget extends State<ListItemsWidget> {
                           getListPar(widget.getListItems.data).length - 1 &&
                       widget.getListItems.data.length % 2 != 0) {
                     return ProductFinal(
-                        datum: getListPar(widget.getListItems.data)[index]);
+                      datum: getListPar(widget.getListItems.data)[index],
+                      onDelete: (String id) {
+                        widget.onDelete(id);
+                      },
+                    );
                   }
-                  return getColumns(getListPar(widget.getListItems.data)[index],
-                      getListImpar(widget.getListItems.data)[index]);
+                  return getColumns(
+                      getListPar(widget.getListItems.data)[index],
+                      getListImpar(widget.getListItems.data)[index],
+                      widget.onDelete);
                 }));
   }
 
@@ -58,18 +66,23 @@ class _ListItemsWidget extends State<ListItemsWidget> {
     return list;
   }
 
-  List<Widget> getListItems(List<Datum> listDatum) {
+  List<Widget> getListItems(List<Datum> listDatum, Function(String) onDelete) {
     List<Widget> listColums = [];
     for (int i = 0; i < listDatum.length; i += 2) {
       if ((i + 1) > listDatum.length - 1) {
-        var widget = ProductFinal(datum: listDatum[i]);
+        var widget = ProductFinal(
+          datum: listDatum[i],
+          onDelete: (String id) {
+            onDelete(id);
+          },
+        );
 
         listColums.add(widget);
       } else {
         var widget = Container(
             child: Column(
           children: [
-            getColumns(listDatum[i], listDatum[i + 1]),
+            getColumns(listDatum[i], listDatum[i + 1], onDelete),
             SizedBox(
               height: 15,
             )
@@ -82,16 +95,26 @@ class _ListItemsWidget extends State<ListItemsWidget> {
     return listColums;
   }
 
-  Widget getColumns(Datum datum0, Datum datum1) {
+  Widget getColumns(Datum datum0, Datum datum1, Function(String) onDelete) {
     return Container(
       height: 181,
       child: Row(
         children: [
-          ProductFinal(datum: datum0),
+          ProductFinal(
+            datum: datum0,
+            onDelete: (String id) {
+              onDelete(id);
+            },
+          ),
           SizedBox(
             width: 14,
           ),
-          ProductFinal(datum: datum1),
+          ProductFinal(
+            datum: datum1,
+            onDelete: (String id) {
+              onDelete(id);
+            },
+          ),
         ],
       ),
     );

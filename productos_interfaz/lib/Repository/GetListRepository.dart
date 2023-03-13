@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:productos_interfaz/Data/GetItemDelete.dart';
+import 'package:productos_interfaz/Data/GetItem.dart';
 
 import '../Data/GetListItems.dart';
 
 abstract class IUGetListrepository {
   void onGetItem(GetListItems getListItems);
-  // void onDeleteItem(GetItemDelete getItemDelete);
-  // void onUpdateItem(GetListItems getListItems);
+  void onDeleteItem();
+  //void onUpdateItem();
   void onError(String error);
 }
 
@@ -34,15 +34,18 @@ class IGetListRepository {
     });
   }
 
-  void deleteItems() {
+  void deleteItems(String id) {
+    Map<String, String> headers = {'Content-Type': 'application/json'};
+
     Uri url = Uri.http("54.144.149.173:5000", "/deleteItem");
 
-    http.post(url).then((response) {
+    var map = {"id": id};
+
+    final msg = jsonEncode(map);
+
+    http.post(url, body: msg, headers: headers).then((response) {
       if (response.statusCode == 200) {
-        String body = response.body;
-        Map<String, dynamic> map = json.decode(body);
-        GetItemDelete getItemDelete = GetItemDelete.fromJson(map);
-        // iuGetListrepository.onDeleteItem(getItemDelete);
+        iuGetListrepository.onDeleteItem();
       } else if (response.statusCode == 400) {
         String body = response.body;
         var map = json.decode(body);

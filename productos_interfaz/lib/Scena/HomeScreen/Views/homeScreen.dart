@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:productos_interfaz/Data/GetItemDelete.dart';
+import 'package:productos_interfaz/Data/GetItem.dart';
 
 import '../../../Data/GetListItems.dart';
 import '../../../widgets/item_selection.dart';
@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
   @override
   Widget build(BuildContext context) {
     iGetViewModel = IGetViewModel(this);
-    iGetViewModel.getListItem();
 
     if (!isFirstCall) {
       iGetViewModel.getListItem();
@@ -66,7 +65,11 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
           //     height: 23,
           //   ),
           (getListItems != null)
-              ? ListItemsWidget(getListItems!)
+              ? ListItemsWidget(
+                  getListItems: getListItems!,
+                  onDelete: (String id) {
+                    iGetViewModel.getItemDelete(id);
+                  })
               : Container(
                   color: Colors.red,
                 ),
@@ -90,7 +93,11 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
   }
 
   @override
-  void onDeleteItem(GetItemDelete getItemDelete) {
+  void onDeleteItem() {
     // TODO: implement onDeleteItem
+
+    // setState(() {
+    //   iGetViewModel.getListItem();
+    // });
   }
 }

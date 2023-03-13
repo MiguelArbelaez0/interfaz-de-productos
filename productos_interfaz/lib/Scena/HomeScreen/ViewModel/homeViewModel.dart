@@ -1,12 +1,11 @@
-import 'package:productos_interfaz/Data/GetItemDelete.dart';
-
+import '../../../Data/GetItem.dart';
 import '../../../Data/GetListItems.dart';
 import '../../../Repository/GetListRepository.dart';
 
 abstract class IIGetListViewModel {
   void onGetItem(GetListItems getListItems);
   void onError(String error);
-  // void onDeleteItem(GetItemDelete getItemDelete);
+  void onDeleteItem();
 }
 
 class IGetViewModel implements IUGetListrepository {
@@ -20,9 +19,9 @@ class IGetViewModel implements IUGetListrepository {
     iGetListRepository.getlistItem();
   }
 
-  // void getItemDelete() {
-  //   iGetListRepository.deleteItems();
-  // }
+  void getItemDelete(String id) {
+    iGetListRepository.deleteItems(id);
+  }
 
   @override
   void onError(String error) {
@@ -36,9 +35,9 @@ class IGetViewModel implements IUGetListrepository {
     iiGetListViewModel.onGetItem(getListItems);
   }
 
-  // @override
-  // void onDeleteItem(GetItemDelete getItemDelete) {
-  //   // TODO: implement onDeleteItem
-  //   iiGetListViewModel.onDeleteItem(getItemDelete);
-  // }
+  @override
+  void onDeleteItem() {
+    // TODO: implement onDeleteItem
+    iiGetListViewModel.onDeleteItem();
+  }
 }
