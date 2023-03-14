@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:productos_interfaz/Data/GetItem.dart';
 import '../../../Data/GetListItems.dart';
 import '../../../widgets/item_selection.dart';
 import '../../../widgets/listItems.dart';
@@ -57,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
             height: 56,
             width: 62,
             onSelectIndex: (indexSeletion) {
-              this.indexSelection = indexSeletion;
+              setState(() {
+                this.indexSelection = indexSeletion;
+              });
             },
           ),
           //  SizedBox(
@@ -93,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
                         });
                     // iGetViewModel.getItemDelete(id);
                   },
+                  indexSelection: this.indexSelection,
                 )
               : Container(
                   color: Colors.red,

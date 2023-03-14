@@ -1,44 +1,54 @@
 import 'package:flutter/material.dart';
+
 import 'package:productos_interfaz/Widgets/product_final.dart';
 
 import '../Data/GetListItems.dart';
 
 class ListItemsWidget extends StatefulWidget {
   GetListItems getListItems;
+  int indexSelection;
   Function(String) onDelete;
+
   ListItemsWidget(
-      {super.key, required this.getListItems, required this.onDelete});
+      {super.key,
+      required this.getListItems,
+      required this.onDelete,
+      required this.indexSelection});
 
   @override
   State<StatefulWidget> createState() => _ListItemsWidget();
 }
 
 class _ListItemsWidget extends State<ListItemsWidget> {
+  late List<Datum> selectionItems;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    if (widget.indexSelection == 0) {
+      selectionItems = widget.getListItems.data;
+    } else if (widget.indexSelection == 1) {
+      selectionItems = widget.getListItems.dataDelete;
+    }
     return Container(
         height: 350,
         child: /*ListView(
         children: getListItems(widget.getListItems.data),
       ),*/
             ListView.builder(
-                itemCount: getListPar(widget.getListItems.data).length,
+                itemCount: getListPar(selectionItems).length,
                 itemBuilder: (BuildContext context, int index) {
-                  if ((index) >=
-                          getListPar(widget.getListItems.data).length - 1 &&
-                      widget.getListItems.data.length % 2 != 0) {
+                  if ((index) >= getListPar(selectionItems).length - 1 &&
+                      selectionItems.length % 2 != 0) {
                     return ProductFinal(
-                      datum: getListPar(widget.getListItems.data)[index],
+                      datum: getListPar(selectionItems)[index],
                       onDelete: (String id) {
                         widget.onDelete(id);
                       },
                     );
                   }
-                  return getColumns(
-                      getListPar(widget.getListItems.data)[index],
-                      getListImpar(widget.getListItems.data)[index],
-                      widget.onDelete);
+                  return getColumns(getListPar(selectionItems)[index],
+                      getListImpar(selectionItems)[index], widget.onDelete);
                 }));
   }
 

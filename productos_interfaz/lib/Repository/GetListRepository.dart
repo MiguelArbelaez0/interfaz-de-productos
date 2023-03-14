@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:productos_interfaz/Data/GetItem.dart';
 
 import '../Data/GetListItems.dart';
 

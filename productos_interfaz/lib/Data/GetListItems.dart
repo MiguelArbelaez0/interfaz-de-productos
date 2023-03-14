@@ -6,18 +6,20 @@ GetListItems getListItemsFromJson(String str) =>
 String getListItemsToJson(GetListItems data) => json.encode(data.toJson());
 
 class GetListItems {
-  GetListItems({
-    required this.data,
-  });
+  GetListItems({required this.data, required this.dataDelete});
 
   List<Datum> data;
+  List<Datum> dataDelete;
 
   factory GetListItems.fromJson(Map<String, dynamic> json) => GetListItems(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        dataDelete:
+            List<Datum>.from(json["dataDelete"].map((x) => Datum.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "dataDelete": List<dynamic>.from(dataDelete.map((x) => x.toJson())),
       };
 }
 
