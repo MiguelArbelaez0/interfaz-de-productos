@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:productos_interfaz/Data/GetItem.dart';
-import 'package:productos_interfaz/Widgets/confirm_delete.dart';
-
 import '../../../Data/GetListItems.dart';
 import '../../../widgets/item_selection.dart';
 import '../../../widgets/listItems.dart';
