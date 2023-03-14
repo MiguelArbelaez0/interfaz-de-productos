@@ -8,13 +8,11 @@ String getListItemsToJson(GetListItems data) => json.encode(data.toJson());
 class GetListItems {
   GetListItems({
     required this.data,
-    required this.dataDelete,
   });
 
   List<Datum> data;
 
   factory GetListItems.fromJson(Map<String, dynamic> json) => GetListItems(
-    dataDelete: ,
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:productos_interfaz/Data/GetItem.dart';
+import 'package:productos_interfaz/Widgets/confirm_delete.dart';
 
 import '../../../Data/GetListItems.dart';
 import '../../../widgets/item_selection.dart';
@@ -68,8 +69,33 @@ class _HomeScreenState extends State<HomeScreen> implements IIGetListViewModel {
               ? ListItemsWidget(
                   getListItems: getListItems!,
                   onDelete: (String id) {
-                    iGetViewModel.getItemDelete(id);
-                  })
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Confirmar eliminación'),
+                            content: Text(
+                                '¿Está seguro que desea eliminar este producto?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  iGetViewModel.getItemDelete(id);
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Eliminar'),
+                              ),
+                            ],
+                          );
+                        });
+                    // iGetViewModel.getItemDelete(id);
+                  },
+                )
               : Container(
                   color: Colors.red,
                 ),
