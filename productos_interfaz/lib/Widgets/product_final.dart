@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productos_interfaz/Scena/UpdateItem/Wiews/update_item_screen.dart';
 
 import '../Data/GetListItems.dart';
 import 'favorite_icon.dart';
@@ -111,7 +112,17 @@ class _ProductFinalState extends State<ProductFinal> {
                                 margin: EdgeInsets.only(right: 3),
                                 width: 19,
                                 height: 19,
-                                child: Icon(Icons.edit),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UpdateItemScreen()),
+                                    );
+                                  },
+                                  child: Icon(Icons.edit),
+                                ),
                               ),
                             ],
                           )

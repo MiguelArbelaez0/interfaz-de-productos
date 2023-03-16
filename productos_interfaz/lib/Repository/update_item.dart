@@ -5,4 +5,9 @@ abstract class IUUpdateItemrepository {
   void onError(String error);
 }
 
-class IUpdateRepository {}
+class IUpdateRepository {
+  late IUUpdateItemrepository iuUpdateItemrepository;
+  IUpdateRepository(this.iuUpdateItemrepository);
+
+  void upDateItem() {}
+}

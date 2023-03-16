@@ -1,4 +1,5 @@
 import '../../../Data/GetListItems.dart';
+import '../../../Data/currency_data.dart';
 import '../../../Repository/GetListRepository.dart';
 
 abstract class IIGetListViewModel {
