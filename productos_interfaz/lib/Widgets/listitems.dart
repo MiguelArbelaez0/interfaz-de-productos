@@ -31,25 +31,24 @@ class _ListItemsWidget extends State<ListItemsWidget> {
       selectionItems = widget.getListItems.dataDelete;
     }
     return Container(
-        height: 350,
-        child: /*ListView(
-        children: getListItems(widget.getListItems.data),
-      ),*/
-            ListView.builder(
-                itemCount: getListPar(selectionItems).length,
-                itemBuilder: (BuildContext context, int index) {
-                  if ((index) >= getListPar(selectionItems).length - 1 &&
-                      selectionItems.length % 2 != 0) {
-                    return ProductFinal(
-                      datum: getListPar(selectionItems)[index],
-                      onDelete: (String id) {
-                        widget.onDelete(id);
-                      },
-                    );
-                  }
-                  return getColumns(getListPar(selectionItems)[index],
-                      getListImpar(selectionItems)[index], widget.onDelete);
-                }));
+        // height: MediaQuery.of(context).size.height,
+        height: 300,
+        // width: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+            itemCount: getListPar(selectionItems).length,
+            itemBuilder: (BuildContext context, int index) {
+              if ((index) >= getListPar(selectionItems).length - 1 &&
+                  selectionItems.length % 2 != 0) {
+                return ProductFinal(
+                  datum: getListPar(selectionItems)[index],
+                  onDelete: (String id) {
+                    widget.onDelete(id);
+                  },
+                );
+              }
+              return getColumns(getListPar(selectionItems)[index],
+                  getListImpar(selectionItems)[index], widget.onDelete);
+            }));
   }
 
   List<Datum> getListPar(List<Datum> listDatum) {
@@ -106,27 +105,30 @@ class _ListItemsWidget extends State<ListItemsWidget> {
   }
 
   Widget getColumns(Datum datum0, Datum datum1, Function(String) onDelete) {
-    return Container(
-      height: 181,
-      child: Row(
-        children: [
-          ProductFinal(
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.only(bottom: 27),
+          child: ProductFinal(
             datum: datum0,
             onDelete: (String id) {
               onDelete(id);
             },
           ),
-          SizedBox(
-            width: 14,
-          ),
-          ProductFinal(
+        ),
+        SizedBox(
+          width: 14,
+        ),
+        Container(
+          padding: EdgeInsets.only(bottom: 27),
+          child: ProductFinal(
             datum: datum1,
             onDelete: (String id) {
               onDelete(id);
             },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

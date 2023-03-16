@@ -231,29 +231,29 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                           borderRadius: BorderRadius.circular(50),
                           child: ElevatedButton(
                             onPressed: () {
-                              if (!validarCampos()) {
-                                Fluttertoast.showToast(
-                                    msg: "Por favor llenar todos los campos",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
-                                return;
-                              }
-                              File file = File(filename?.path ?? "");
+                              // if (!validarCampos()) {
+                              //   Fluttertoast.showToast(
+                              //       msg: "Por favor llenar todos los campos",
+                              //       toastLength: Toast.LENGTH_SHORT,
+                              //       gravity: ToastGravity.CENTER,
+                              //       timeInSecForIosWeb: 1,
+                              //       backgroundColor: Colors.red,
+                              //       textColor: Colors.white,
+                              //       fontSize: 16.0);
+                              //   return;
+                              // }
+                              // File file = File(filename?.path ?? "");
 
-                              ItemData itemData = ItemData(
-                                name: name.text,
-                                description: description.text,
-                                idCurrency: idCurrency ?? "",
-                                price: double.parse(price.text),
-                                imageFile: file,
-                                urlImage: "",
-                              );
+                              // ItemData itemData = ItemData(
+                              //   name: name.text,
+                              //   description: description.text,
+                              //   idCurrency: idCurrency ?? "",
+                              //   price: double.parse(price.text),
+                              //   imageFile: file,
+                              //   urlImage: "",
+                              // );
 
-                              iUpdateViewModel.onUpdateItem(itemData);
+                              // iUpdateViewModel.onUpdateItem(itemData);
                             },
                             child: Text(
                               'Update Item',
