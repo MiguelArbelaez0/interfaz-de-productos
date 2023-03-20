@@ -58,6 +58,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final description = TextEditingController();
+  final price = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
