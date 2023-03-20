@@ -14,7 +14,7 @@ class ListRepository {
   ListRepository(this.iListRepository);
 
   void getListCurrency() {
-    Uri url = Uri.http("54.144.149.173:5000", "/getListCurrency");
+    Uri url = Uri.http("44.215.48.103:5000", "/getListCurrency");
 
     http.get(url).then((response) {
       if (response.statusCode == 200) {

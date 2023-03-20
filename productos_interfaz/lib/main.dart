@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:productos_interfaz/Routes/routes.dart';
 import 'package:productos_interfaz/Scena/AddProduct/Views/add_item.dart';
 import 'package:productos_interfaz/Scena/HomeScreen/Views/homeScreen.dart';
+import 'package:productos_interfaz/Scena/UpdateItem/Wiews/update_item_screen.dart';
 
 void main() {
   runApp(const MyApp());

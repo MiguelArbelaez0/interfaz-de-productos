@@ -114,7 +114,7 @@ class _ProductFinalState extends State<ProductFinal> {
                                 height: 19,
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context, "update",
+                                    Navigator.pushNamed(context, "/update",
                                         arguments: widget.datum);
                                   },
                                   child: Icon(Icons.edit),

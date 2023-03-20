@@ -43,17 +43,17 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
 
   ListCurrency? listCurrency;
 
-  validarCampos() {
-    if (name.text.isEmpty ||
-        description.text.isEmpty ||
-        price.text.isEmpty ||
-        selectedValue == null ||
-        filename == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // validarCampos() {
+  //   if (name.text.isEmpty ||
+  //       description.text.isEmpty ||
+  //       price.text.isEmpty ||
+  //       selectedValue == null ||
+  //       filename == null) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
@@ -77,7 +77,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     }
     name.text = widget.datum.name;
     description.text = widget.datum.description;
-    // filename.path = widget.datum.urlImage;
+    price.text = widget.datum.price.toString();
 
     return Scaffold(
       body: Stack(
@@ -238,17 +238,17 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                           borderRadius: BorderRadius.circular(50),
                           child: ElevatedButton(
                             onPressed: () {
-                              if (!validarCampos()) {
-                                Fluttertoast.showToast(
-                                    msg: "Por favor llenar todos los campos",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
-                                return;
-                              }
+                              // if (!validarCampos()) {
+                              //   Fluttertoast.showToast(
+                              //       msg: "Por favor llenar todos los campos",
+                              //       toastLength: Toast.LENGTH_SHORT,
+                              //       gravity: ToastGravity.CENTER,
+                              //       timeInSecForIosWeb: 1,
+                              //       backgroundColor: Colors.red,
+                              //       textColor: Colors.white,
+                              //       fontSize: 16.0);
+                              //   return;
+                              // }
                               File file = File(filename?.path ?? "");
 
                               ItemData itemData = ItemData(

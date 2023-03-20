@@ -19,7 +19,7 @@ class ITemRepository {
     File imageFile,
     ItemData itemData,
   ) {
-    Uri url = Uri.http("54.144.149.173:5000", "/addItem");
+    Uri url = Uri.http("44.215.48.103:5000", "/addItem");
     final request = http.MultipartRequest('POST', url);
 
     final fileStream = http.ByteStream(Stream.castFrom(imageFile.openRead()));
