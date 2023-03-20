@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:productos_interfaz/Data/item_data.dart';
 import 'package:productos_interfaz/Repository/update_item.dart';
 
@@ -18,8 +20,14 @@ class IupdateViewModel implements IUUpdateItemrepository, IListRepository {
     iUpdateRepository = IUpdateRepository(this);
     listRespository = ListRepository(this);
   }
-  void upDateItem() {
-    iUpdateRepository.upDateItem();
+  void upDateItem(
+    File imageFile,
+    ItemData itemData,
+  ) {
+    iUpdateRepository.updateItem(
+      imageFile,
+      itemData,
+    );
   }
 
   void getListText() {

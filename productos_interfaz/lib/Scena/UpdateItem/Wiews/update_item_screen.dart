@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:productos_interfaz/Data/GetListItems.dart';
 import 'package:productos_interfaz/Data/item_data.dart';
 
 import '../../../Data/currency_data.dart';
@@ -11,7 +12,8 @@ import '../../../Widgets/select_image.dart';
 import '../ViewModel/updateItemViewModel.dart';
 
 class UpdateItemScreen extends StatefulWidget {
-  const UpdateItemScreen({super.key});
+  Datum datum;
+  UpdateItemScreen({super.key, required this.datum});
 
   @override
   State<UpdateItemScreen> createState() => _UpdateItemScreenState();
@@ -56,7 +58,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final description = TextEditingController();
-  final price = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     iUpdateViewModel = IupdateViewModel(this);
@@ -72,6 +74,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     } else {
       sendImage = Image.file(File(filename!.path));
     }
+    name.text = widget.datum.name;
+    description.text = widget.datum.description;
+    // filename.path = widget.datum.urlImage;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -231,29 +237,29 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                           borderRadius: BorderRadius.circular(50),
                           child: ElevatedButton(
                             onPressed: () {
-                              // if (!validarCampos()) {
-                              //   Fluttertoast.showToast(
-                              //       msg: "Por favor llenar todos los campos",
-                              //       toastLength: Toast.LENGTH_SHORT,
-                              //       gravity: ToastGravity.CENTER,
-                              //       timeInSecForIosWeb: 1,
-                              //       backgroundColor: Colors.red,
-                              //       textColor: Colors.white,
-                              //       fontSize: 16.0);
-                              //   return;
-                              // }
-                              // File file = File(filename?.path ?? "");
+                              if (!validarCampos()) {
+                                Fluttertoast.showToast(
+                                    msg: "Por favor llenar todos los campos",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                return;
+                              }
+                              File file = File(filename?.path ?? "");
 
-                              // ItemData itemData = ItemData(
-                              //   name: name.text,
-                              //   description: description.text,
-                              //   idCurrency: idCurrency ?? "",
-                              //   price: double.parse(price.text),
-                              //   imageFile: file,
-                              //   urlImage: "",
-                              // );
+                              ItemData itemData = ItemData(
+                                name: name.text,
+                                description: description.text,
+                                idCurrency: idCurrency ?? "",
+                                price: double.parse(price.text),
+                                imageFile: file,
+                                urlImage: "",
+                              );
 
-                              // iUpdateViewModel.onUpdateItem(itemData);
+                              iUpdateViewModel.onUpdateItem(itemData);
                             },
                             child: Text(
                               'Update Item',
@@ -297,11 +303,6 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   }
 
   @override
-  void onError(String error) {
-    // TODO: implement onError
-  }
-
-  @override
   void onUpdateComplete(ItemData itemData) {
     // TODO: implement onUpdateComplete
   }
@@ -319,5 +320,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     setState(() {
       items = listText;
     });
+  }
+
+  @override
+  void onError(String error) {
+    // TODO: implement onError
   }
 }
