@@ -54,6 +54,13 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   //     return true;
   //   }
   // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    iUpdateViewModel = IupdateViewModel(this);
+    iUpdateViewModel.getListText();
+  }
 
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
@@ -62,9 +69,6 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
 
   @override
   Widget build(BuildContext context) {
-    iUpdateViewModel = IupdateViewModel(this);
-    iUpdateViewModel.getListText();
-    if (!isFirstCall) {}
     Widget sendImage = Image(
       image: AssetImage('assets/vector.png'),
     );
@@ -78,6 +82,9 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     name.text = widget.datum.name;
     description.text = widget.datum.description;
     price.text = widget.datum.price.toString();
+    Data? currencyUpdate = listCurrency?.data?.firstWhere((currency) {
+      return currency.currency == widget.datum.currency;
+    });
 
     return Scaffold(
       body: Stack(
@@ -156,37 +163,40 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                         width: 340,
                         margin: EdgeInsets.only(left: 17, right: 17),
                         child: DropdownButtonHideUnderline(
-                            child: DropdownButton2(
-                          hint: Text(
-                            'Select Item',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).hintColor,
+                          child: DropdownButton2(
+                            hint: Text(
+                              'Select Item',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).hintColor,
+                              ),
                             ),
-                          ),
-                          items: items
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                            items: items
+                                .map((item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-                                  ))
-                              .toList(),
-                          value: selectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedValue = value as String;
-                              idCurrency = (listCurrency?.data ?? [])
-                                  .firstWhere((moneda) {
-                                return "${moneda.moneda} ${moneda.currency}" ==
-                                    selectedValue;
-                              }).id;
-                            });
-                          },
-                        )),
+                                    ))
+                                .toList(),
+                            value: (currencyUpdate != null)
+                                ? "${currencyUpdate.moneda} ${currencyUpdate.currency}"
+                                : null,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedValue = value as String;
+                                idCurrency = (listCurrency?.data ?? [])
+                                    .firstWhere((moneda) {
+                                  return "${moneda.moneda} ${moneda.currency}" ==
+                                      selectedValue;
+                                }).id;
+                              });
+                            },
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 19,
