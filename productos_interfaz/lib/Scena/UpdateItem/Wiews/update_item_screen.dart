@@ -12,8 +12,8 @@ import '../../../Widgets/select_image.dart';
 import '../ViewModel/updateItemViewModel.dart';
 
 class UpdateItemScreen extends StatefulWidget {
-  Datum datum;
-  UpdateItemScreen({super.key, required this.datum});
+  final Datum datum;
+  const UpdateItemScreen({super.key, required this.datum});
 
   @override
   State<UpdateItemScreen> createState() => _UpdateItemScreenState();
