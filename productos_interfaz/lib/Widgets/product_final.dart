@@ -30,100 +30,109 @@ class _ProductFinalState extends State<ProductFinal> {
               ),
               child: Column(
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 106),
-                            child: FavoriteIcon(
-                              iconData: Icons.favorite,
-                              defaultColor: Colors.grey,
-                              pressedColor: Colors.red,
-                              isFavorited: true,
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 25,
                       ),
-                      ClipOval(
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(widget.datum.urlImage),
-                                fit: BoxFit.cover),
+                      // Container(
+                      //   margin: EdgeInsets.only(left: 106),
+                      //   child: FavoriteIcon(
+                      //     iconData: Icons.favorite,
+                      //     defaultColor: Colors.grey,
+                      //     pressedColor: Colors.red,
+                      //     isFavorited: true,
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                  ClipOval(
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(widget.datum.urlImage),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: 13,
+                        ),
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          widget.datum.name,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
                           ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 13),
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          "${widget.datum.currency}${widget.datum.price.toString()}",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
-                              left: 13,
-                            ),
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              widget.datum.name,
-                              style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                            margin: EdgeInsets.only(right: 6),
+                            width: 19,
+                            height: 19,
+                            child: GestureDetector(
+                              onTap: () {
+                                widget.onDelete(widget.datum.id);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  right: 6,
+                                ),
+                                child: Icon(Icons.delete),
                               ),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 13),
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "${widget.datum.currency}${widget.datum.price.toString()}",
-                              style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12,
+                            margin: EdgeInsets.only(right: 6),
+                            width: 19,
+                            height: 19,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "/update",
+                                    arguments: widget.datum);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  right: 6,
+                                ),
+                                child: Icon(Icons.edit),
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 6),
-                                width: 19,
-                                height: 19,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    widget.onDelete(widget.datum.id);
-                                  },
-                                  child: Icon(Icons.delete),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 6,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(right: 3),
-                                width: 19,
-                                height: 19,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, "/update",
-                                        arguments: widget.datum);
-                                  },
-                                  child: Icon(Icons.edit),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
-                      ),
+                      )
                     ],
                   ),
                 ],
