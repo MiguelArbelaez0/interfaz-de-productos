@@ -3,6 +3,7 @@ import 'package:productos_interfaz/Scena/UpdateItem/Wiews/update_item_screen.dar
 
 import '../Data/GetListItems.dart';
 import 'favorite_icon.dart';
+import 'package:image_network/image_network.dart';
 
 class ProductFinal extends StatefulWidget {
   Datum datum;
@@ -50,14 +51,10 @@ class _ProductFinalState extends State<ProductFinal> {
                         ],
                       ),
                       ClipOval(
-                        child: Container(
-                          width: 80,
+                        child: ImageNetwork(
+                          image: widget.datum.urlImage,
                           height: 80,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(widget.datum.urlImage),
-                                fit: BoxFit.cover),
-                          ),
+                          width: 80,
                         ),
                       ),
                       Column(

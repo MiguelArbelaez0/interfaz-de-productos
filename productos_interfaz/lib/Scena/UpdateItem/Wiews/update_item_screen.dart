@@ -55,6 +55,14 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   //   }
   // }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    iUpdateViewModel = IupdateViewModel(this);
+    iUpdateViewModel.getListText();
+    iUpdateViewModel.getImageFile(widget.datum.urlImage);
+  }
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final description = TextEditingController();
@@ -62,9 +70,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
 
   @override
   Widget build(BuildContext context) {
-    iUpdateViewModel = IupdateViewModel(this);
-    iUpdateViewModel.getListText();
-    if (!isFirstCall) {}
+
     Widget sendImage = Image(
       image: AssetImage('assets/vector.png'),
     );
@@ -79,6 +85,9 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     description.text = widget.datum.description;
     price.text = widget.datum.price.toString();
 
+    Data? currencyUpdate = listCurrency?.data?.firstWhere((currency){
+      return currency.currency == widget.datum.currency;
+    });
     return Scaffold(
       body: Stack(
         children: [
@@ -175,7 +184,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                                     ),
                                   ))
                               .toList(),
-                          value: selectedValue,
+                          value: (currencyUpdate != null) ? "${currencyUpdate!.moneda} ${currencyUpdate!.currency}" : null,
                           onChanged: (value) {
                             setState(() {
                               selectedValue = value as String;
@@ -326,5 +335,13 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   @override
   void onError(String error) {
     // TODO: implement onError
+  }
+
+  @override
+  void onCompleteLoadImage(XFile fileName) {
+    // TODO: implement onCompleteLoadImage
+    setState(() {
+      this.filename = fileName;
+    });
   }
 }

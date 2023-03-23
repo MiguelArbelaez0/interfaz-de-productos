@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:productos_interfaz/Data/item_data.dart';
 import 'package:productos_interfaz/Repository/update_item.dart';
 
@@ -10,6 +11,7 @@ abstract class IUpdateViewModel {
   void onUpdateComplete(ItemData itemData);
   void onCompleteGetListCurrency(ListCurrency listCurrency);
   void onError(String error);
+  void onCompleteLoadImage(XFile fileName);
 }
 
 class IupdateViewModel implements IUUpdateItemrepository, IListRepository {
@@ -34,6 +36,9 @@ class IupdateViewModel implements IUUpdateItemrepository, IListRepository {
     listRespository.getListCurrency();
   }
 
+  void getImageFile(String urlImage) {
+    iUpdateRepository.getImageFile(urlImage);
+  }
   @override
   void onError(String error) {
     // TODO: implement onError
@@ -55,5 +60,10 @@ class IupdateViewModel implements IUUpdateItemrepository, IListRepository {
   @override
   void onShowError(String error) {
     // TODO: implement onShowError
+  }
+
+  @override
+  void onCompleteLoadImage(XFile fileName) {
+    iUpdateViewModel.onCompleteLoadImage(fileName);
   }
 }
