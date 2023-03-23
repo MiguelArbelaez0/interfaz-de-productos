@@ -43,23 +43,25 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
 
   ListCurrency? listCurrency;
 
-  // validarCampos() {
-  //   if (name.text.isEmpty ||
-  //       description.text.isEmpty ||
-  //       price.text.isEmpty ||
-  //       selectedValue == null ||
-  //       filename == null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
+  validarCampos() {
+    if (name.text.isEmpty ||
+        description.text.isEmpty ||
+        price.text.isEmpty ||
+        selectedValue == null ||
+        filename == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     iUpdateViewModel = IupdateViewModel(this);
     iUpdateViewModel.getListText();
+    iUpdateViewModel.getUpdateImage(widget.datum.urlImage);
   }
 
   final formKey = GlobalKey<FormState>();
@@ -248,17 +250,17 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                           borderRadius: BorderRadius.circular(50),
                           child: ElevatedButton(
                             onPressed: () {
-                              // if (!validarCampos()) {
-                              //   Fluttertoast.showToast(
-                              //       msg: "Por favor llenar todos los campos",
-                              //       toastLength: Toast.LENGTH_SHORT,
-                              //       gravity: ToastGravity.CENTER,
-                              //       timeInSecForIosWeb: 1,
-                              //       backgroundColor: Colors.red,
-                              //       textColor: Colors.white,
-                              //       fontSize: 16.0);
-                              //   return;
-                              // }
+                              if (!validarCampos()) {
+                                Fluttertoast.showToast(
+                                    msg: "Por favor llenar todos los campos",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                return;
+                              }
                               File file = File(filename?.path ?? "");
 
                               ItemData itemData = ItemData(
@@ -336,5 +338,13 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
   @override
   void onError(String error) {
     // TODO: implement onError
+  }
+
+  @override
+  void onCompleteSaveImage(XFile fileName) {
+    // TODO: implement onCompleteSaveImage
+    setState(() {
+      this.filename = fileName;
+    });
   }
 }

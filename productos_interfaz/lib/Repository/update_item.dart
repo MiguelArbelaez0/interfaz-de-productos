@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:productos_interfaz/Data/item_data.dart';
 import 'dart:convert';
 
@@ -7,12 +9,32 @@ import 'package:http/http.dart' as http;
 
 abstract class IUUpdateItemrepository {
   void onUpdateItem(ItemData itemData);
+  void onCompleteSaveImage(XFile filename);
   void onError(String error);
 }
 
 class IUpdateRepository {
   late IUUpdateItemrepository iuUpdateItemrepository;
   IUpdateRepository(this.iuUpdateItemrepository);
+
+  void getUpdateImage(String urlImage) {
+    Uri uri = Uri.parse(urlImage);
+
+    http.get(uri).then((response) {
+      if (response.statusCode == 200) {
+        getTemporaryDirectory().then((directory) {
+          final path = '${directory.path}/filename.png';
+          File(path).writeAsBytesSync(response.bodyBytes);
+          XFile xFile = XFile(path);
+          iuUpdateItemrepository.onCompleteSaveImage(xFile);
+        });
+      } else {
+        iuUpdateItemrepository.onError("no fue posible guardar la imagen");
+      }
+    }).catchError((er) {
+      iuUpdateItemrepository.onError(er.toString());
+    });
+  }
 
   void updateItem(
     File imageFile,
