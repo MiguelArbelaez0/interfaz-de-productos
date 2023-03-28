@@ -36,7 +36,7 @@ class IGetListRepository {
   void deleteItems(String id) {
     Map<String, String> headers = {'Content-Type': 'application/json'};
 
-    Uri url = Uri.http("54.144.149.173:5000", "/deleteItem");
+    Uri url = Uri.http("localhost:27017/", "/deleteItem");
 
     var map = {"id": id};
 

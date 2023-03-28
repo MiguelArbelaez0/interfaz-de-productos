@@ -30,9 +30,9 @@ class _ListItemsWidget extends State<ListItemsWidget> {
     } else if (widget.indexSelection == 1) {
       selectionItems = widget.getListItems.dataDelete;
     }
-    return Container(
+    return Expanded(
         // height: MediaQuery.of(context).size.height,
-        height: 300,
+
         // width: MediaQuery.of(context).size.width,
         child: ListView.builder(
             itemCount: getListPar(selectionItems).length,

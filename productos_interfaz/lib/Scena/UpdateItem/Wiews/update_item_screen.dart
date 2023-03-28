@@ -87,7 +87,12 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
     Data? currencyUpdate = listCurrency?.data?.firstWhere((currency) {
       return currency.currency == widget.datum.currency;
     });
-
+    selectedValue = (currencyUpdate != null)
+        ? "${currencyUpdate.moneda} ${currencyUpdate.currency}"
+        : null;
+    idCurrency = listCurrency?.data?.firstWhere((element) {
+      return element.currency == widget.datum.currency;
+    }).id;
     return Scaffold(
       body: Stack(
         children: [
@@ -184,9 +189,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                                       ),
                                     ))
                                 .toList(),
-                            value: (currencyUpdate != null)
-                                ? "${currencyUpdate.moneda} ${currencyUpdate.currency}"
-                                : null,
+                            value: selectedValue,
                             onChanged: (value) {
                               setState(() {
                                 selectedValue = value as String;
@@ -272,7 +275,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen>
                                 urlImage: "",
                               );
 
-                              iUpdateViewModel.onUpdateItem(itemData);
+                              iUpdateViewModel.upDateItem(
+                                file,
+                                itemData,
+                              );
                             },
                             child: Text(
                               'Update Item',
